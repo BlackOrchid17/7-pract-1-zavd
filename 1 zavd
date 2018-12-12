@@ -1,1 +1,71 @@
 
+#include <iostream>
+#include <conio.h>
+using namespace std;
+class Middle {
+	int a;
+	int b;
+public:
+	Middle() {
+		a = 0;
+		b = 0;
+	}
+	Middle(int ValueA, int ValueB) {
+		a = ValueA;
+		b = ValueB;
+	}
+	Middle & operator -- () {
+		this->a--;
+		this->b--;
+		return *this;
+	}
+	Middle & operator ++ (int value) {
+		Middle temp(*this);
+		this->a++;
+		this->b++;
+		return temp;
+	}
+
+	Middle operator + (const Middle & other) {
+		Middle temp1;
+
+		temp1.a = this->a + other.a;
+		temp1.b = this->b + other.b;
+
+		return temp1;
+	}
+
+	void Print() {
+		cout << " a = " << a << "\n" << " b = " << b << endl;
+	}
+	friend ostream & operator << (ostream &out, Middle obj);
+	Middle operator=(Middle obj);
+};
+Middle Middle::operator = (Middle obj)
+{
+	a = obj.a;
+	b = obj.b;
+}
+ostream & operator <<(ostream &out, Middle obj)
+{
+	out << " a = " << obj.a;
+	cout << endl;
+	out << " b = " << obj.b;
+}
+
+int main()
+{
+	Middle obj(4, 4);
+	Middle obj2(5, 5);
+	cout << endl;
+	obj++;
+	Middle obj3 = obj + obj2;
+
+	obj3.Print();
+	cout << endl;
+	cout << obj;
+	cout << '\a\a';
+	system("pause");
+	return 0;
+}
+
